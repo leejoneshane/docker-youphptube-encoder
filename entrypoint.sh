@@ -13,13 +13,13 @@ if [[ "${DOMAIN}" != "your.domain" && "${DB_HOST}" != "localhost" ]]; then
         "/var/www/localhost/htdocs/encoder/videos/configuration.php"
   fi
 
-  if mysqlshow --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} youPHPTube-Encoder; then
+  if mysqlshow --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} youPHPTubeEncoder; then
     echo "database exist!"
   else
-    echo "CREATE DATABASE youPHPTube-Encoder CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" | mysql --host="${DB_HOST}" --user="${DB_USER}" --password="${DB_PASSWORD}"
-    mysql --host="${DB_HOST}" --user="${DB_USER}" --password="${DB_PASSWORD}" youPHPTube-Encoder < /var/www/localhost/htdocs/encoder/install/database.sql
-    echo "USE youPHPTube-Encoder; INSERT INTO streamers (siteURL, user, pass, priority, created, modified, isAdmin) VALUES ('${DOMAIN_PROTOCOL}://${DOMAIN}', 'admin', md5('${ADMIN_PASSWORD}'), 1, now(), now(), 1);" | mysql --host="${DB_HOST}" --user="${DB_USER}" --password="${DB_PASSWORD}"
-    echo "USE youPHPTube-Encoder; INSERT INTO configurations (id, allowedStreamersURL, defaultPriority, version, created, modified) VALUES (1, '${DOMAIN_PROTOCOL}://${DOMAIN}', 1, '2.3', now(), now());"
+    echo "CREATE DATABASE youPHPTubeEncoder CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" | mysql --host="${DB_HOST}" --user="${DB_USER}" --password="${DB_PASSWORD}"
+    mysql --host="${DB_HOST}" --user="${DB_USER}" --password="${DB_PASSWORD}" youPHPTubeEncoder < /var/www/localhost/htdocs/encoder/install/database.sql
+    echo "USE youPHPTubeEncoder; INSERT INTO streamers (siteURL, user, pass, priority, created, modified, isAdmin) VALUES ('${DOMAIN_PROTOCOL}://${DOMAIN}', 'admin', md5('${ADMIN_PASSWORD}'), 1, now(), now(), 1);" | mysql --host="${DB_HOST}" --user="${DB_USER}" --password="${DB_PASSWORD}"
+    echo "USE youPHPTubeEncoder; INSERT INTO configurations (id, allowedStreamersURL, defaultPriority, version, created, modified) VALUES (1, '${DOMAIN_PROTOCOL}://${DOMAIN}', 1, '2.3', now(), now());" | mysql --host="${DB_HOST}" --user="${DB_USER}" --password="${DB_PASSWORD}"
   fi
 fi
 
