@@ -3,7 +3,7 @@ set -euo pipefail
 
 if [[ "${DOMAIN}" != "your.domain" && "${DB_HOST}" != "localhost" ]]; then
   if [ ! -f encoder/videos/configuration.php ]; then
-    cp /root/encoder_configuration.php /var/www/localhost/htdocs/encoder/videos/configuration.php
+    cp /root/configuration.php /var/www/localhost/htdocs/encoder/videos/configuration.php
     sed -ri \
         -e "s!PROTOCOL!${DOMAIN_PROTOCOL}!g" \
         -e "s!DOMAIN!${DOMAIN}!g" \
