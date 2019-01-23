@@ -9,7 +9,7 @@ $mysqlHost = 'DB_HOST';
 $mysqlPort = '3306';
 $mysqlUser = 'DB_USER';
 $mysqlPass = 'DB_PASSWORD';
-$mysqlDatabase = 'youPHPTube-Encoder';
+$mysqlDatabase = 'youPHPTubeEncoder';
 
 /**
  * Do NOT change from here
