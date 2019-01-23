@@ -1,6 +1,6 @@
 <?php
 $global['webSiteRootURL'] = 'PROTOCOL://DOMAIN/';
-$global['systemRootPath'] = '/var/www/localhost/htdocs/encoder/';
+$global['systemRootPath'] = '/var/www/localhost/htdocs/';
 $global['disableConfigurations'] = false;
 $global['disableBulkEncode'] = false;
 $global['allowed'] = array('mp4', 'avi', 'mov', 'flv', 'mp3', 'wav', 'm4v', 'webm', 'wmv', 'mpg', 'mpeg', 'f4v', 'm4v', 'm4a', 'm2p', 'rm', 'vob', 'mkv', '3gp');
