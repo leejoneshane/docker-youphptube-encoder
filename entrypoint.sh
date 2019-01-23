@@ -2,15 +2,15 @@
 set -euo pipefail
 
 if [[ "${DOMAIN}" != "your.domain" && "${DB_HOST}" != "localhost" ]]; then
-  if [ ! -f encoder/videos/configuration.php ]; then
-    cp /root/configuration.php /var/www/localhost/htdocs/encoder/videos/configuration.php
+  if [ ! -f /var/www/localhost/htdocs/videos/configuration.php ]; then
+    cp /root/configuration.php /var/www/localhost/htdocs/videos/configuration.php
     sed -ri \
         -e "s!PROTOCOL!${DOMAIN_PROTOCOL}!g" \
         -e "s!DOMAIN!${DOMAIN}!g" \
         -e "s!DB_HOST!${DB_HOST}!g" \
         -e "s!DB_USER!${DB_USER}!g" \
         -e "s!DB_PASSWORD!${DB_PASSWORD}!g" \
-        "/var/www/localhost/htdocs/encoder/videos/configuration.php"
+        "/var/www/localhost/htdocs/videos/configuration.php"
   fi
 
   if mysqlshow --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} youPHPTubeEncoder; then
