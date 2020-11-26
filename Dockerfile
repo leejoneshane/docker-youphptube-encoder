@@ -11,7 +11,7 @@ ENV DB_PASSWORD password
 ENV SALT your.salt
 ENV LANG en
 
-ADD configuration.php /root/
+ADD install.php /root/
 ADD entrypoint.sh /usr/local/bin/
 ADD gencerts.sh /usr/local/bin/
 WORKDIR /var/www/html
