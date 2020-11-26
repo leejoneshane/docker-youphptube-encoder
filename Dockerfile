@@ -35,6 +35,5 @@ RUN apt-get update \
     && chmod a+rx /usr/local/bin/gencerts.sh \
     && chown -R www-data:www-data /var/www/html
 
-VOLUME ["/var/www/html"]
-EXPOSE 80 443
+VOLUME ["/var/www/html/videos"]
 CMD ["entrypoint.sh"]
