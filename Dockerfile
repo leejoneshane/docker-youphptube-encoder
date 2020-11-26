@@ -23,12 +23,13 @@ RUN apt-get update \
     && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /root/.cache \
     && a2enmod rewrite \
     && pip install -U youtube-dl \
+    && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && sed -ri \
            -e 's!^(max_execution_time = )(.*)$!\1 72000!g' \
            -e 's!^(post_max_size = )(.*)$!\1 10G!g' \
            -e 's!^(upload_max_filesize = )(.*)$!\1 10G!g' \
            -e 's!^(memory_limit = )(.*)$!\1 10G!g' \
-           "/usr/local/etc/php/php.ini" \
+           "$PHP_INI_DIR/php.ini" \
        \
     && git clone https://github.com/WWBN/AVideo-Encoder.git \
     && mv AVideo-Encoder/* . \
