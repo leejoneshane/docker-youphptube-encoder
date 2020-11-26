@@ -1,4 +1,4 @@
-# docker-youphptube
+# youphptube-encoder
 
 This is a docker image to run YouPHPTube-Encoder in LXC.
 
