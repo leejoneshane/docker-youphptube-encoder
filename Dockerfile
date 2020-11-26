@@ -9,7 +9,6 @@ ENV DB_PASSWORD password
 
 ADD install.php /root/
 ADD entrypoint.sh /usr/local/bin/
-ADD gencerts.sh /usr/local/bin/
 WORKDIR /var/www/html
 
 RUN apt-get update \
