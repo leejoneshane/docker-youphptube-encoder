@@ -2,14 +2,10 @@ FROM php:7-apache
 
 ENV DOMAIN your.domain
 ENV DOMAIN_PROTOCOL http
-ENV SITE_TITLE your_site_title
 ENV ADMIN_PASSWORD password
-ENV ADMIN_EMAIL webmaster@your.domain
 ENV DB_HOST localhost
 ENV DB_USER root
 ENV DB_PASSWORD password
-ENV SALT your.salt
-ENV LANG en
 
 ADD install.php /root/
 ADD entrypoint.sh /usr/local/bin/
