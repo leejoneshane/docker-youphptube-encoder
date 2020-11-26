@@ -1,4 +1,4 @@
-FROM alpine
+FROM php:7-apache
 
 ENV DOMAIN your.domain
 ENV DOMAIN_PROTOCOL http
@@ -14,39 +14,30 @@ ENV LANG en
 ADD configuration.php /root/
 ADD entrypoint.sh /usr/local/bin/
 ADD gencerts.sh /usr/local/bin/
-WORKDIR /var/www/localhost/htdocs
+WORKDIR /var/www/html
 
-RUN apk update  \
-    && apk add --no-cache git curl certbot acme-client openssl mysql-client apache2 apache2-ssl php7 php7-apache2 php7-mysqlnd php7-mysqli php7-json php7-session php7-curl php7-gd php7-intl php7-exif php7-mbstring php7-gettext ffmpeg exiftool perl-image-exiftool python youtube-dl \
-    && rm -rf /var/cache/apk/* \
-    && mkdir /run/apache2 \
-    && sed -ri \
-           -e 's!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g' \
-           -e 's!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g' \
-           -e 's!^#(LoadModule rewrite_module .*)$!\1!g' \
-           -e 's!^(\s*AllowOverride) None.*$!\1 All!g' \
-           "/etc/apache2/httpd.conf" \
-       \
+RUN apt-get update \
+    && apt-get install -y wget git zip default-libmysqlclient-dev libbz2-dev libmemcached-dev libsasl2-dev libfreetype6-dev libicu-dev libjpeg-dev libmemcachedutil2 libpng-dev libxml2-dev mariadb-client ffmpeg libimage-exiftool-perl python curl python-pip libzip-dev libonig-dev \
+    && docker-php-ext-configure gd --with-freetype=/usr/include --with-jpeg=/usr/include \
+    && docker-php-ext-install -j$(nproc) bcmath bz2 calendar exif gd gettext iconv intl mbstring mysqli opcache pdo_mysql zip \
+    && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /root/.cache \
+    && a2enmod rewrite \
+    && pip install -U youtube-dl \
     && sed -ri \
            -e 's!^(max_execution_time = )(.*)$!\1 72000!g' \
            -e 's!^(post_max_size = )(.*)$!\1 10G!g' \
            -e 's!^(upload_max_filesize = )(.*)$!\1 10G!g' \
            -e 's!^(memory_limit = )(.*)$!\1 10G!g' \
-           "/etc/php7/php.ini" \
+           "/usr/local/etc/php/php.ini" \
        \
-    && rm -f index.html \
-    && git clone https://github.com/DanielnetoDotCom/YouPHPTube-Encoder.git \
-    && mv YouPHPTube-Encoder/* . \
-    && mv YouPHPTube-Encoder/.[!.]* . \
-    && rm -rf YouPHPTube-Encoder \
+    && git clone https://github.com/WWBN/AVideo-Encoder.git \
+    && mv AVideo-Encoder/* . \
+    && mv AVideo-Encoder/.[!.]* . \
+    && rm -rf AVideo-Encoder \
     && chmod a+rx /usr/local/bin/entrypoint.sh \
     && chmod a+rx /usr/local/bin/gencerts.sh \
-    && mkdir videos \
-    && chmod 755 videos \
-    && chown -R apache:apache /var/www
+    && chown -R www-data:www-data /var/www/html
 
-ADD tw.php /var/www/localhost/htdocs/locale
-
-VOLUME ["/var/www/localhost/htdocs/videos"]
+VOLUME ["/var/www/html"]
 EXPOSE 80 443
 CMD ["entrypoint.sh"]
