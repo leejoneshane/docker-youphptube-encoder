@@ -1,6 +1,6 @@
 #!/usr/bin/php -q
 <?php
-$installationVersion = "3.3";
+$installationVersion = '3.3';
 $p = getenv('PROTOCOL');
 $d = getenv('DOMAIN');
 $dbh = getenv('DB_HOST');
@@ -41,14 +41,14 @@ if (!file_exists($file)) {
 \$mysqlPort = '3306';
 \$mysqlUser = '$dbu';
 \$mysqlPass = '$dbp';
-\$mysqlDatabase = 'youPHPTube';
+\$mysqlDatabase = 'youPHPTubeEncoder';
 \$global['allowed'] = array('mp4', 'avi', 'mov', 'flv', 'mp3', 'wav', 'm4v', 'webm', 'wmv', 'mpg', 'mpeg', 'f4v', 'm4v', 'm4a', 'm2p', 'rm', 'vob', 'mkv', '3gp');
 /**
  * Do NOT change from here
  */
 require_once \$global['systemRootPath'].'objects/include_config.php';
 ";
-    $fp = fopen($file, "wb");
+    $fp = fopen($file, 'wb');
     fwrite($fp, $content);
     fclose($fp);
 }
