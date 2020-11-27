@@ -1,15 +1,15 @@
 #!/usr/bin/php -q
 <?php
 $installationVersion = '3.3';
-$p = getenv('PROTOCOL');
-$d = getenv('DOMAIN');
-$dbh = getenv('DB_HOST');
-$dbu = getenv('DB_USER');
+$p = getenv('DOMAIN_PROTOCOL') ?: 'http';
+$d = getenv('DOMAIN') ?: 'localhost';
+$dbh = getenv('DB_HOST') ?: 'mysql';
+$dbu = getenv('DB_USER') ?: 'root';
 $dbp = getenv('DB_PASSWORD');
 $ap = getenv('ADMIN_PASSWORD');
-$t = getenv('SITE_TITLE');
-$l = getenv('LANG');
-$en = getenv('ENCODER');
+$t = getenv('SITE_TITLE') ?: 'AVideo';
+$l = getenv('LANG') ?: 'en';
+$en = getenv('ENCODER') ?: 'https://encoder1.avideo.com/';
 
 $conn = new mysqli($dbh, $dbu, $dbp, 'youPHPTubeEncoder');
 if ($conn->connect_error) {
