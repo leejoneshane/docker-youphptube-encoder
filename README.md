@@ -1,6 +1,6 @@
 # youphptube-encoder
 
-This is a docker image to run YouPHPTube-Encoder in LXC.
+This is a docker image to run AVideo-Encoder 3.3 in LXC.
 
 <img src="https://avideo.tube/website/assets/151/images/avideo_encoder1.png"/>
 
