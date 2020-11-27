@@ -1,9 +1,9 @@
 FROM php:7-apache
 
-ENV DOMAIN your.domain
+ENV DOMAIN localhost
 ENV DOMAIN_PROTOCOL http
 ENV ADMIN_PASSWORD password
-ENV DB_HOST localhost
+ENV DB_HOST mysql
 ENV DB_USER root
 ENV DB_PASSWORD password
 
