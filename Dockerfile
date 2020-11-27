@@ -26,7 +26,6 @@ RUN apt-get update \
     && mv AVideo-Encoder/.[!.]* . \
     && rm -rf AVideo-Encoder \
     && chmod a+rx /usr/local/bin/entrypoint.sh \
-    && chmod a+rx /usr/local/bin/gencerts.sh \
     && chown -R www-data:www-data /var/www/html
 
 VOLUME ["/var/www/html/videos"]
