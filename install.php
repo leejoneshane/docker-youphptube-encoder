@@ -17,7 +17,18 @@ if ($conn->connect_error) {
     $sql = 'CREATE DATABASE IF NOT EXISTS youPHPTubeEncoder CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;';
     $conn->query($sql);
     $conn->select_db('youPHPTubeEncoder');
-    $conn->query(file_get_contents('/var/www/html/install/database.sql'));
+    $lines = file('/var/www/html/install/database.sql');
+    $templine = '';
+    foreach ($lines as $line) {
+        if (substr($line, 0, 2) == '--' || $line == '') {
+            continue;
+        }
+        $templine .= $line;
+        if (substr(trim($line), -1, 1) == ';') {
+            $conn->query($templine);
+            $templine = '';
+        }
+    }
     $sql = "INSERT INTO streamers (siteURL, user, pass, priority, created, modified, isAdmin) VALUES ('$p://$d/', 'admin', '$ap', 1, now(), now(), 1)";
     $conn->query($sql);
     $sql = "INSERT INTO configurations (id, allowedStreamersURL, defaultPriority, version, created, modified) VALUES (1, '$p://$d/', '1', '$installationVersion', now(), now())";
