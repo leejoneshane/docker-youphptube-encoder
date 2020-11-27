@@ -30,7 +30,7 @@ if (!file_exists($file)) {
     $content = "<?php
 \$global['configurationVersion'] = 2;
 \$global['webSiteRootURL'] = '$p://$d/';
-\$global['systemRootPath'] = '/var/www/html';
+\$global['systemRootPath'] = '/var/www/html/';
 \$global['webSiteRootPath'] = '$d';
 \$global['disableConfigurations'] = false;
 \$global['disableBulkEncode'] = false;
