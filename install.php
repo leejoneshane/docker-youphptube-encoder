@@ -11,7 +11,7 @@ $t = getenv('SITE_TITLE') ?: 'AVideo';
 $l = getenv('LANG') ?: 'en';
 $en = getenv('ENCODER') ?: 'https://encoder1.avideo.com/';
 
-$conn = new mysqli($dbh, $dbu, $dbp, 'youPHPTubeEncoder');
+$conn = @new mysqli($dbh, $dbu, $dbp, 'youPHPTubeEncoder');
 if ($conn->connect_error) {
     $conn = new mysqli($dbh, $dbu, $dbp);
     $sql = 'CREATE DATABASE IF NOT EXISTS youPHPTubeEncoder CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;';
